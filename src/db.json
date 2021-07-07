@@ -1,0 +1,14 @@
+{
+    "usuarios": [
+        {
+            "nombre": "Victor",
+            "apellido": "Di Lena",
+            "token": "1234"
+        },
+        {
+            "nombre": "Matias",
+            "apellido": "Vivas",
+            "token": "1234"
+        }
+    ]
+}

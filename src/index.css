@@ -13,6 +13,16 @@ body {
   text-align: center;
 }
 
+button:hover{
+  background-color: lightslategray;
+  color: aliceblue;
+}
+
+/*En tu hoja de estilos */
+a:link, a:visited, a:active {
+  text-decoration:none;
+}
+
 a {
   text-decoration: none;
   color:black;
@@ -21,6 +31,8 @@ a {
 
 h1{
   padding-bottom: 1em;
+  background-color: lightslategray;
+  color: aliceblue;
 }
 
 .container-flex {
@@ -45,7 +57,7 @@ h1{
 .movieCard img{
   border-radius: 6px;
   border:none;
-  height: 60%;
+  height: 30%;
 }
 
 .footer{

@@ -1,9 +1,9 @@
-import React,{Component} from 'react';
+import React from 'react';
 const Footer =()=> {
         return(
         <div className="col-12 footer d-flex align-items-end justify-content-center">
-                <a>Proyecto de peliculas ejercicio 4</a>
+                <a href="www.google.com">Proyecto de peliculas ejercicio 4</a>
         </div>
         )
-    };
+};
 export default Footer;

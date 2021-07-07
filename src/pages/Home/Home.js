@@ -1,43 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 import MovieCard from '../../components/MovieCard/index';
 import Footer from '../../components/Footer/index';
-import {useState, useEffect} from 'react';
+import LoginModal from '../../components/login/LoginModal';
+import axios from 'axios';
 
- const Home= ()=>{
+const api = axios.create({
+  baseURL: 'https://api.themoviedb.org/3/discover/movie?api_key=acd2849521817b153ed4fcbd82583faa&language=es-ES&primary_release_year=2021'
+});
 
- const [premiere, setPremier]=useState([]);
- 
-  function getPremiere() {
-    return fetch('https://api.themoviedb.org/3/discover/movie?api_key=acd2849521817b153ed4fcbd82583faa&language=es-ES&primary_release_year=2021')
-      .then(data => data.json())
-  }
+const Home = () => {
+
+  const [premier, setPremier] = useState([]);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    getPremiere()
-      .then(premiere => {
-          //setPremier({premiere:json.results.slice(0,12)})
-          setPremier(premiere)
-      })
-  }, []);
+    api.get('/').then(res => {
+      console.log("Peliculas por Axios: " + res.data.results.slice(0, 12));
+      setPremier(res.data.results.slice(0, 12));
+    }, []);
 
-  //const { premiere} = this.state;
-  return(
-      <div className='Home'>
-        <div className='container-flex'>
-    
-            <div className='col-12 anchor' id='premiere'>
-                <h1>Posters</h1>
-                <div className='row'>
-                  <div className='col-12 text-left'>
-                  </div>
-                      {premiere.map(movie => <MovieCard movie ={movie} key={movie.id}/>)}
-                </div>
-              </div> 
+}, []);
+
+  const selectModal = (info) => {
+    setModal(!modal)
+  }
+
+  return (
+    <div className='Home'>
+      <div className='container-flex'>
+        <div className='col-12 anchor' id='premiere'>
+          <h1 className="posterAlign" id="componentTest">Posters</h1>
+          <div className="App">
+            <button onClick={() => selectModal()} className="form-control"
+            >Login</button>
+            <LoginModal
+              displayModal={modal}
+              closeModal={() => selectModal()}
+            />
+          </div>
+          <div className='row'>
+            <div className='col-12 text-left'>
+            </div>
+            {premier.map(movie => <MovieCard movie={movie} key={movie.id} />)}
+          </div>
         </div>
-        <Footer />   
       </div>
-    );
+      <Footer />
+    </div>
+  );
 };
 export default Home;
 
